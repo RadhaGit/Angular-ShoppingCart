@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html ng-app="shopCart">
+
+<head>
+  <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body ng-controller="TestController">
+  <div class="container">
+    <h1>Shop Here!</h1>
+    <p ng-model="p1">Hello {{name}}</p>
+    Search for Item:
+    <input type="text" ng-model="search">
+    
+    <ul class="list-inline" align="right">
+      <li>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal_cat">Categories</button>
+      </li>
+
+
+      <li>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal_login">Login</button>
+      </li>
+      <div id="myModal_login" class="modal fade">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Enter valid Email-Id and Password</h4>
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <td>Email Id:<span style="color:red">*</span></td>
+                <td>
+                  <input type="email" name="email_id" placeholder="Ex: abc@gmail.com">
+                </td>
+              </tr>
+              <tr>
+                <td>Password:<span style="color:red">*</span></td>
+                <td>
+                  <input type="password" name="pswd" placeholder="Enter Here">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Login</button>
+          </div>
+        </div>
+      </div>
+
+      <li>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal_register">Register</button>
+        <div id="myModal_register" class="modal fade">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Enter Your Details Here</h4>
+            </div>
+            <div class="modal-body">
+              <table>
+                <tr>
+                  <td>First Name:<span style="color:red">*</span></td>
+                  <td>
+                    <input type="text" name="first_name" placeholder="Enter Here">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Last Name:</td>
+                  <td>
+                    <input type="text" name="last_name" placeholder="Enter Here">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email Id:<span style="color:red">*</span></td>
+                  <td>
+                    <input type="email" name="email_id" placeholder="Ex: abc@gmail.com" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Choose Password:<span style="color:red">*</span></td>
+                  <td>
+                    <input type="password" name="pswd" placeholder="Enter Here" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Re-enter Password:<span style="color:red">*</span></td>
+                  <td>
+                    <input type="password" name="pswd" placeholder="Enter Here" required>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+     
+    <table class="table table-hover" border="1" width="40%">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Categeory</th>
+          <th>Description</th>
+          <th>Price/ Item</th>
+          <th>Available Quantity</th>
+          <th> Add</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items|filter:search">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.categeory}}</td>
+          <td>{{item.desc}}</td>
+          <td>{{item.price|currency}}</td>
+          <td>{{item.qua}}</td>
+          <td>Number of Items:
+            <input type="number" ng-model="n_books" />
+            <button type="button" class="btn btn-primary" ng-click="addToCart(item,n_books)">AddToCart</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <!--Show Cart:<button ng-click="showCart()"> Show Cart</button><br/>-->
+
+    Items in Cart:
+    <table class="table table-bordered" border="1" width="50">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Categeory</th>
+          <th>Description</th>
+          <th>Price/ Item</th>
+          <th>No.of Items</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in cart">
+          <td>{{i.id}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.categeory}}</td>
+          <td>{{i.desc}}</td>
+          <td>{{i.price}}</td>
+          <td>{{i.qua}}</td>
+          <td>{{i.qua*i.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <!--ng-click="checkOut()"-->
+    <a href="cart.html" class="btn btn-success">Check out</a>
+  </div>
+</body>
+</html>
