@@ -93,13 +93,13 @@
                 <tr>
                   <td>Re-enter Password:<span style="color:red">*</span></td>
                   <td>
-                    <input type="password" name="pswd" placeholder="Enter Here" required>
+                    <input type="password" name="re_pswd" placeholder="Enter Here" required>
                   </td>
                 </tr>
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Sign Up</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="AddToUser(first_name,last_name,email_id,pswd,re_pswd)">Sign Up</button>
             </div>
           </div>
         </div>
@@ -147,6 +147,7 @@
           <th>Price/ Item</th>
           <th>No.of Items</th>
           <th>Total Price</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -158,6 +159,7 @@
           <td>{{i.price}}</td>
           <td>{{i.qua}}</td>
           <td>{{i.qua*i.price}}</td>
+          <td><button type="button" class="btn btn-primary" ng-click="deleteCart(i,i.qua)">Delete From Cart</button></td>
         </tr>
       </tbody>
     </table>
