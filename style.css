@@ -6,3 +6,13 @@ h1{
   text-align:center;
   background-color:#ffdb4d;
 }
+#myModal_login{
+width:30%;
+position:relative;
+text-align:right;
+}
+#myModal_register{
+width:30%;
+position:relative;
+text-align:right;
+}
