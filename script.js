@@ -5,16 +5,51 @@ var app=angular.module('shopCart',[]);
 app.controller('TestController',function($scope,$rootScope){
   $rootScope.name="Hi";
   //$scope.cart=false;
-  $scope.n_books;
+  //$scope.n_books;
   $scope.ins_item={};
   //id, name, category, description, price, quantity
   $rootScope.finalcart;
   $rootScope.items=[{id:1,name:'Programming with Java',categeory:'Book1',desc:'Desc1',price:50,qua:10},
   {id:2,name:'Programming with PL/SQL',categeory:'Book2',desc:'Desc2',price:55,qua:12},
-  {id:3,name:'Programming with PL/SQL',categeory:'Book2',desc:'Desc2',price:55,qua:12}];
+  {id:3,name:'Programming with C',categeory:'Book2',desc:'Desc2',price:55,qua:12}];
 $rootScope.cart=[];
 $scope.exist=0;
 $scope.id=0;
+// $scope.first_name=null;
+// $scope.last_name=null;
+// $scope.email_id=null;
+// $scope.pswd=null;
+// $scope.re_pswd=null;
+$scope.users=[];
+$rootScope.user={};
+$scope.AddToUser=function(first_name,last_name,email_id,pswd,re_pswd){
+  //if(first_name!==null&&email_id!==null&&pswd!==null&&re_pswd!==null){
+    $rootScope.user={FirstName:first_name,LastName:last_name,EmailId:email_id,Password:pswd};
+
+  //}
+}
+$scope.deleteCart=function(item){
+  //window.alert(item.id);
+  var id_del;
+  for(var i=0;i<$rootScope.cart.length;i++){
+    if($rootScope.cart[i].id==item.id){
+      $rootScope.cart.splice(i,1);
+      // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
+      // item.qua=item.qua-n_books;
+    }
+  }
+  for(var i=0;i<$rootScope.items.length;i++){
+    if($rootScope.items[i].id==item.id){
+      $rootScope.items[i].qua=$rootScope.items[i].qua+item.qua;
+    // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
+    // item.qua=item.qua-n_books;
+    }
+  }
+  //item.qua=item.qua+n_books;
+  item={};
+  //$scope.n_books=null;
+}
+
 $scope.addToCart=function(item,n_books){
   if(item.qua-n_books>=0){
     ins_item=angular.copy(item);
@@ -49,7 +84,7 @@ $scope.addToCart=function(item,n_books){
     // }
     item={};$scope.n_books=null;$scope.exist=0;
   }else{
-    alert("In sufficient quantity"+item.id);
+    alert("In sufficient quantity");
   }
 }
 // $scope.showCart=function(){
