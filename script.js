@@ -11,45 +11,35 @@ app.controller('TestController',function($scope,$rootScope){
   $rootScope.finalcart;
   $rootScope.items=[{id:1,name:'Programming with Java',categeory:'Book1',desc:'Desc1',price:50,qua:10},
   {id:2,name:'Programming with PL/SQL',categeory:'Book2',desc:'Desc2',price:55,qua:12},
-  {id:3,name:'Programming with C',categeory:'Book2',desc:'Desc2',price:55,qua:12}];
+  {id:3,name:'Programming with PL/SQL',categeory:'Book2',desc:'Desc2',price:55,qua:12}];
 $rootScope.cart=[];
 $scope.exist=0;
 $scope.id=0;
+$rootScope.msg="";
 // $scope.first_name=null;
 // $scope.last_name=null;
 // $scope.email_id=null;
 // $scope.pswd=null;
 // $scope.re_pswd=null;
-$scope.users=[];
-$rootScope.user={};
+$rootScope.users=[];
+$scope.user={};
 $scope.AddToUser=function(first_name,last_name,email_id,pswd,re_pswd){
-  //if(first_name!==null&&email_id!==null&&pswd!==null&&re_pswd!==null){
-    $rootScope.user={FirstName:first_name,LastName:last_name,EmailId:email_id,Password:pswd};
-
-  //}
-}
-$scope.deleteCart=function(item){
-  //window.alert(item.id);
-  var id_del;
-  for(var i=0;i<$rootScope.cart.length;i++){
-    if($rootScope.cart[i].id==item.id){
-      $rootScope.cart.splice(i,1);
-      // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
-      // item.qua=item.qua-n_books;
+  //if(first_name!==null){
+  if(first_name!==undefined&&email_id!==undefined&&pswd!==undefined&&re_pswd!==undefined){
+    if(pswd==re_pswd){
+      $scope.user={FirstName:first_name,LastName:last_name,EmailId:email_id,Password:pswd};
+      $rootScope.users.push(user);
+     }
+    else{
+      window.alert("Passwords does not match");
     }
   }
-  for(var i=0;i<$rootScope.items.length;i++){
-    if($rootScope.items[i].id==item.id){
-      $rootScope.items[i].qua=$rootScope.items[i].qua+item.qua;
-    // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
-    // item.qua=item.qua-n_books;
-    }
+  else{
+    window.alert("Enter data in all Manadatory(* marked) feilds");
   }
-  //item.qua=item.qua+n_books;
-  item={};
-  //$scope.n_books=null;
 }
 
+//Add items to cart
 $scope.addToCart=function(item,n_books){
   if(item.qua-n_books>=0){
     ins_item=angular.copy(item);
@@ -87,6 +77,29 @@ $scope.addToCart=function(item,n_books){
     alert("In sufficient quantity");
   }
 }
+//Delete item from cart
+$scope.deleteCart=function(item){
+  //window.alert(item.id);
+  var id_del;
+  for(var i=0;i<$rootScope.cart.length;i++){
+    if($rootScope.cart[i].id==item.id){
+      $rootScope.cart.splice(i,1);
+      // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
+      // item.qua=item.qua-n_books;
+    }
+  }
+  for(var i=0;i<$rootScope.items.length;i++){
+    if($rootScope.items[i].id==item.id){
+      $rootScope.items[i].qua=$rootScope.items[i].qua+item.qua;
+    // $scope.cart[i].qua=$scope.cart[i].qua+n_books;
+    // item.qua=item.qua-n_books;
+    }
+  }
+  //item.qua=item.qua+n_books;
+  item={};
+  //$scope.n_books=null;
+}
+
 // $scope.showCart=function(){
 //   $scope.cart=true;
 // }
